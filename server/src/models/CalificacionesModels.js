@@ -1,4 +1,4 @@
-const { DataTypes } = require( 'sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define("Calificacio", {
@@ -11,21 +11,18 @@ module.exports = (sequelize) => {
         idusuario: {
             type: DataTypes.INTEGER,
             allowNull: true,
-         
         },
-        cursoid: {
+        cursoId: {
             type: DataTypes.INTEGER,
             allowNull: true,
-           
         },
         rating: {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
-        isdeleted: {
+        isDeleted: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-    
     }, { timestamps: false });
 };
