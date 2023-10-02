@@ -1,4 +1,4 @@
-const { DataTypes } = require( 'sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define("User", {
@@ -8,22 +8,35 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false,
         },
+        uid: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        contraseña: {
+        password: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        roluser: {
-            type: DataTypes.INTEGER,
+        type: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        estado: {
-            type: DataTypes.INTEGER,
+        root: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        
-    }, { timestamps: false });
+        isDeleted: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+
+    });
 };

@@ -1,8 +1,8 @@
 const  { Router } = require ('express');
-const TerapiaRouter = require('./terapia');
+const UsersRouter = require('./users');
 
 const router = Router();
 
-router.use("/", TerapiaRouter);
+router.use("/", UsersRouter);
 
 module.exports= router
