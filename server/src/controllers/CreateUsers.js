@@ -34,6 +34,7 @@ const createUser = async (user) => {
         })
         return newUser
     } catch (error) {
+        
         // console.log(error);
         throw new Error(error);
     }
