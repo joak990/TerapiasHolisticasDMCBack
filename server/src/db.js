@@ -11,6 +11,7 @@ const UsuarioModels = require('./models/UsuariosModels')
 const CursoModels = require('./models/CursosModels')
 const ComentarioModels = require('./models/ComentariosModels')
 const CalificacionesModels = require('./models/CalificacionesModels')
+const MyCourses = require('./models/MyCoursesModals')
 
 const sequelize = new Sequelize(`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
     logging: false, 
@@ -24,14 +25,15 @@ UsuarioModels(sequelize)
 CursoModels(sequelize)
 ComentarioModels(sequelize)
 CalificacionesModels(sequelize)
+MyCourses(sequelize)
 
-const { User, Curso, Comentario, Calification } = sequelize.models;
+const { User, Comentario, Calification , Curso_Usuario} = sequelize.models;
 
 //Un usuarios puede tener muchos cursos
-User.hasMany(Curso);
+User.hasMany(Curso_Usuario);
 
 //Un curso puede pertecer a muchos usuarios
-Curso.belongsTo(User)
+Curso_Usuario.belongsTo(User)
 
 //-------------------
 

@@ -1,7 +1,7 @@
 const { DataTypes } = require( 'sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define("Curso", {
+    sequelize.define("Curso_Usuario", {
         id: {
             type: DataTypes.STRING,
             defaultValue: DataTypes.UUIDV4,
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         imagen: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         isDeleted: {
