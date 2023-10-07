@@ -27,15 +27,8 @@ ComentarioModels(sequelize)
 CalificacionesModels(sequelize)
 MyCourses(sequelize)
 
-const { User, Comentario, Calification , Curso,  Curso_Usuario} = sequelize.models;
+const { User, Comentario, Calification , Curso} = sequelize.models;
 
-//Un usuarios puede tener muchos cursos
-User.hasMany(Curso_Usuario);
-
-//Un curso puede pertecer a muchos usuarios
-Curso_Usuario.belongsTo(User)
-
-//-------------------
 
 User.hasMany(Comentario);
 
@@ -51,11 +44,8 @@ Calification.belongsTo(User)
 
 //-----------------------------
 
-Curso.hasMany(Curso_Usuario);
-
-//Un curso puede pertecer a muchos usuarios
-Curso_Usuario.belongsTo(Curso)
-
+User.belongsToMany(Curso, { through: 'Usuario_Curso', /* options */ });
+Curso.belongsToMany(User, { through: 'Usuario_Curso', /* options */ });
 
 module.exports = {
     ...sequelize.models,
