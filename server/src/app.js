@@ -16,11 +16,10 @@ app.use(morgan("dev"));
 
 
 // Configuración CORS específica
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-}));
-
+app.use(cors({   
+                origin: "https://main--amazing-buttercream-47d324.netlify.app/", 
+                methods: ["GET", "POST", "PUT", "DELETE"], 
+              }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
