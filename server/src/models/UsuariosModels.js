@@ -37,10 +37,6 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: false
         }, 
-        otp: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            defaultValue: false
-        },
+        
     });
 };
