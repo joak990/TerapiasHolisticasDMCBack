@@ -37,13 +37,5 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: false
         },
-        verificationCode: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            validate: {
-                isInt: true,
-                len: [1000, 9999] // Asegura que tenga exactamente cuatro dígitos.
-            },
-        }
     });
 };
