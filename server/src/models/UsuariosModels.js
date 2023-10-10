@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
-function generateOTP() {
-  return Math.floor(1000 + Math.random() * 9000).toString(); // Genera un número aleatorio de 4 dígitos
+function generateRandom4DigitOTP() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
 module.exports = (sequelize) => {
@@ -50,8 +50,11 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Genera un código OTP de 4 dígitos al crear un nuevo usuario
-  sequelize.addHook('beforeCreate', (user) => {
-    user.otp = generateOTP();
-  });
+  // Para crear un nuevo usuario con un código OTP aleatorio:
+  const newUser = {
+    // Otras propiedades del usuario...
+    otp: generateRandom4DigitOTP(), // Genera el código OTP
+  };
+
+  // Ahora crea el nuevo usuario en la base de datos usando sequelize.create(newUser);
 }
