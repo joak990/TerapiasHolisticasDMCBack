@@ -3,7 +3,7 @@ const cors = require('cors');
 const server = require('./src/app.js'); 
 
 const corsOptions = {
-    origin: 'https://main--amazing-buttercream-47d324.netlify.app',
+    origin: 'http://127.0.0.1:5173',
 };
 
 server.use(cors(corsOptions));
