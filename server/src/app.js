@@ -17,7 +17,7 @@ app.use(morgan("dev"));
 
 // Configuración CORS específica
 app.use(cors({   
-                origin: "https://main--amazing-buttercream-47d324.netlify.app/", 
+                origin: "https://main--amazing-buttercream-47d324.netlify.app", 
                 methods: ["GET", "POST", "PUT", "DELETE"], 
               }));
 
