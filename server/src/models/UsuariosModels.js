@@ -37,9 +37,5 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: false
         }, 
-        otp:{
-      type:DataTypes.STRING,
-      allowNull: false,
-        },
     });
 };
