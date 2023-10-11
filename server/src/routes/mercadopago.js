@@ -11,22 +11,29 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
     try {
         //- Configurar la preferencia de MercadoPago
     
-        console.log(req.body);
+      
     
         const preference = {
           items: [
             {
            
               title: req.body.title,
+              description: "cosa para comprar",
               unit_price: req.body.price,
-              currency_id: "ARS", // La moneda en la que se cotiza el producto
-              quantity: req.body.quantity, // Agregar la cantidad deseada aquí
-            },
+              currency_id: "ARS", // 
+              quantity: req.body.quantity, 
+            }, 
           ],
+          back_urls: {
+            "success": "http://localhost:5173/",
+            "failure": "http://localhost:5173/error",
+            "pending": ""
+          },
+          auto_return: "approved",
         };
     
         const response = await mercadopago.preferences.create(preference);
-        res.status(200).send({ response });
+        res.status(200).json({id :response.body.id });
       } catch (error) {
         console.error("Error al procesar la solicitud:", error);
         res.status(500).send(error.message);
