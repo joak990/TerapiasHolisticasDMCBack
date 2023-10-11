@@ -22,6 +22,10 @@ module.exports = (sequelize) => {
         isDeleted: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        new: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     }, { timestamps: false });
 };
