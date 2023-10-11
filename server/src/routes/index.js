@@ -10,6 +10,6 @@ router.use("/", UsersRouter);
 router.use("/send-email", Mailerrouter)
 router.use("/cursos", Cursorouter)
 router.use("/videos", Videosrouter )
-
+router.use("/",mercadoPagoRouter )
 
 module.exports= router
