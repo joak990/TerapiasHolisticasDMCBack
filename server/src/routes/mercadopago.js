@@ -17,8 +17,8 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
         },
       ],
       back_urls: {
-        "success": "https://terapias-holisticas-dmc-back.vercel.app/success",
-        "failure": "https://terapias-holisticas-dmc-back.vercel.app/error",
+        "success": "https://main--amazing-buttercream-47d324.netlify.app/success",
+        "failure": "https://main--amazing-buttercream-47d324.netlify.app/error",
         "pending": ""
       },
       auto_return: "approved",
