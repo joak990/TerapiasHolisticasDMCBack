@@ -17,8 +17,8 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
         },
       ],
       back_urls: {
-        "success": "http://localhost:5173/success",
-        "failure": "http://localhost:5173/error",
+        "success": "https://terapias-holisticas-dmc-back.vercel.app/success",
+        "failure": "https://terapias-holisticas-dmc-back.vercel.app/error",
         "pending": ""
       },
       auto_return: "approved",
