@@ -17,7 +17,7 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
         },
       ],
       back_urls: {
-        "success": "http://localhost:5173/",
+        "success": "http://localhost:5173/success",
         "failure": "http://localhost:5173/error",
         "pending": ""
       },
@@ -36,11 +36,13 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
     };
 
     const response = await mercadopago.preferences.create(preference);
-    res.status(200).json({ id: response.body.id });
+    res.status(200).json( { id: response.body.id });
   } catch (error) {
     console.error("Error al procesar la solicitud:", error);
     res.status(500).send(error.message);
   }
 });
+
+
 
 module.exports = mercadoPagoRouter;

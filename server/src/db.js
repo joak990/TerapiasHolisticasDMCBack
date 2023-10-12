@@ -14,12 +14,24 @@ const CalificacionesModels = require('./models/CalificacionesModels')
 const MyCourses = require('./models/MyCoursesModals')
 const MyVideos = require('./models/VideosCursosModals')
 
-const sequelize = new Sequelize(`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`, {
-    logging: false, 
-    native:false,
-    dialectModule: pg,// set to console.log to see the raw SQL queries
-});
+  const poll = new pg.Pool({connectionString:"postgres://terapiasholisticas:7eDKfa6SAJnrhX90MSBx62NKbRzP00i1@dpg-ckk5b0cl4vmc73fq5a0g-a.ohio-postgres.render.com/terapiasdb_ra8m"})
 
+ const sequelize = new Sequelize({
+    dialect: 'postgres',
+    pool: poll,
+    username: DB_USER,
+    password: DB_PASSWORD,
+    host: DB_HOST,
+    port: DB_PORT,
+    database: DB_DATABASE,
+    logging: false,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false // Puedes ajustar esto según tus necesidades
+        }
+    },
+});
 
 
 UsuarioModels(sequelize)

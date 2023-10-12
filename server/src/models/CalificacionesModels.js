@@ -16,11 +16,16 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
+       
         rating: {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
         isDeleted: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        otpp: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
