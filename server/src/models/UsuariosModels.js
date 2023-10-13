@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
         }, 
        otp: {
             type: DataTypes.INTEGER,
-            allowNull: true,
+            allowNull: false,
         }, 
        
        

@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
+        rating: {
+            type: DataTypes.STRING,
+            allowNull: false,   
+        },
         createdInDb: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
