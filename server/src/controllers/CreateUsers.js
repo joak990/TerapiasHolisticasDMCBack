@@ -1,12 +1,19 @@
 const { User } = require('../db');
-
+const { Op } = require('sequelize');
 const createUser = async (user) => {
     try {
+        function generateRandomOTP() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
         let root = '';
+        let otp = null
         user.uid ? (root = 'google') : (root = 'register');
-        
-        console.log('root-->>', root);
-
+       
+       if(root === "register"){
+        otp = generateRandomOTP()
+       }else{
+        otp= 0
+       }
         const userDb = await User.findOne({
             where: { email: user.email }
         })
@@ -31,6 +38,8 @@ const createUser = async (user) => {
             root: root,
             isDeleted: user.isDeleted,
             uid: user.uid,
+            otp: otp,
+            
         })
         return newUser
     } catch (error) {
@@ -39,6 +48,7 @@ const createUser = async (user) => {
         throw new Error(error);
     }
 }
+
 
 module.exports = {
     createUser

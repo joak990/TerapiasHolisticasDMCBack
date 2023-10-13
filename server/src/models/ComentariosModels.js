@@ -25,10 +25,6 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: true,
         },
-        otp: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: false
-        },
+      
     }, { timestamps: false });
 };

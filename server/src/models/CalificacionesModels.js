@@ -25,9 +25,6 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-        otpp: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
+       
     }, { timestamps: false });
 };
