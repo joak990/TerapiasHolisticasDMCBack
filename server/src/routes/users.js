@@ -3,6 +3,9 @@ const UsersRouter = express.Router();
 
 const { createUser } = require( '../controllers/CreateUsers.js');
 const { validateUsers } = require( '../controllers/ValidateUser.js');
+const sendrecovery = require('../controllers/SendRecovery.js');
+const recoverypass = require('../controllers/RecoveryPass.js');
+
 
 UsersRouter.post("/users", async (req,res) => {
     try {
@@ -21,6 +24,32 @@ UsersRouter.post("/validate", async (req,res) => {
         const {email, password} = req.body
         const validateUser = await validateUsers(email, password)
         res.status(200).send(validateUser);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+});
+
+
+UsersRouter.post("/send-recovery", async (req,res) => {
+    try {
+        
+        const {email} = req.body
+        console.log(email,"s");
+        const recoverypassword = await sendrecovery(email)
+        res.status(200).json(recoverypassword);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+});
+
+
+UsersRouter.put("/recovery", async (req,res) => {
+    try {
+        
+        const {code,email,password} = req.body
+        
+        const recoveryfinish = await recoverypass(email,code,password)
+        res.status(200).json(recoveryfinish);
     } catch (error) {
         res.status(400).send({ error: error.message });
     }

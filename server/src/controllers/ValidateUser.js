@@ -1,26 +1,32 @@
 const { User } = require('../db');
+const bcrypt = require('bcrypt');
 
-const validateUsers = async (email, password ,type) => {
+const validateUsers = async (email, password, type) => {
     try {
-        const EmailUser = await User.findOne({
-            where: {email:email}
-        })
+        const user = await User.findOne({
+            where: { email: email }
+        });
 
-        if (EmailUser && EmailUser.isDeleted) {
-            return EmailUser.isDeleted
+        if (user && user.isDeleted) {
+            return user.isDeleted;
         }
 
-        if (EmailUser) {
-            if(EmailUser.password === password) {
+        if (user) {
+            // Utiliza bcrypt.compare para verificar la contraseña
+            const passwordMatch = await bcrypt.compare(password, user.password);
+
+            if (passwordMatch) {
                 return {
-                    id: EmailUser.id, 
-                    email: EmailUser.email, 
-                    name: EmailUser.name
-                }; 
+                    id: user.id,
+                    email: user.email,
+                    name: user.name
+                };
             }
-            return false;
+
+            return false; // La contraseña no coincide
         }
-        return false;
+
+        return false; // El usuario no existe
 
     } catch (error) {
         throw new Error(error);
