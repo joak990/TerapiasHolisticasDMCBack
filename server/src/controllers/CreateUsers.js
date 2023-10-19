@@ -37,7 +37,7 @@ const createUser = async (user) => {
             password: hashedPassword,
             type: user.type,
             root: root,
-            isDeleted: user.isDeleted,
+            isDeleted: true,
             uid: user.uid,
             otp: otp,
             
@@ -71,8 +71,7 @@ const createUser = async (user) => {
             },2 * 60 * 1000); 
         }
         
-        console.log(otp);
-        console.log(user.email);
+    
         return newUser
     } catch (error) {
         
