@@ -5,7 +5,7 @@ const { createUser } = require( '../controllers/CreateUsers.js');
 const { validateUsers } = require( '../controllers/ValidateUser.js');
 const sendrecovery = require('../controllers/SendRecovery.js');
 const recoverypass = require('../controllers/RecoveryPass.js');
-
+const reSendRecovery  = require('../controllers/ReSendRecovery.js');
 
 UsersRouter.post("/users", async (req,res) => {
     try {
@@ -55,5 +55,17 @@ UsersRouter.put("/recovery", async (req,res) => {
     }
 });
 
+
+UsersRouter.post("/resendcode", async (req,res) => {
+    try {
+        
+        const {email} = req.body
+        
+        const resendactive = await reSendRecovery(email)
+        res.status(200).json(resendactive);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+});
 
 module.exports =  UsersRouter;
