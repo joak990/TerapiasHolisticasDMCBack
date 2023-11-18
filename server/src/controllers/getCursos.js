@@ -2,7 +2,11 @@ const { Curso } = require('../db');
 
 const getCursos = async () => {
     try {
-        const cursos = await Curso.findAll();
+        // Especifica las columnas que deseas obtener, incluyendo 'contents'
+        const cursos = await Curso.findAll({
+            attributes: [ 'id',"nombre","descripcion","precio","imagen","isDeleted","createdInDb","contents"],
+        });
+
         return cursos;
     } catch (error) {
         console.error('Error al obtener cursos:', error);
@@ -10,4 +14,4 @@ const getCursos = async () => {
     }
 }
 
-module.exports = getCursos
+module.exports = getCursos;

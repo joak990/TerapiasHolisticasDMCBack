@@ -17,8 +17,8 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
         },
       ],
       back_urls: {
-        "success": "https://main--amazing-buttercream-47d324.netlify.app/success",
-        "failure": "https://main--amazing-buttercream-47d324.netlify.app/error",
+        "success": "http://localhost:5174/success",
+        "failure": "http://localhost:5174/error",
         "pending": ""
       },
       auto_return: "approved",
