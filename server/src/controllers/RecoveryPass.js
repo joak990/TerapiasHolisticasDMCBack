@@ -1,19 +1,15 @@
 const { User } = require('../db');
 const bcrypt = require('bcrypt'); // Asegúrate de tener la biblioteca bcrypt instalada
 
-const recoverypass = async (email, code, password) => {
+const recoverypass = async (email, password) => {
   try {
     console.log(email,"emailhere");
+    console.log(password,"paswwordhere");
     const user = await User.findOne({ where: { email: email } });
 
 if(!user){
     return false
 }
-
- // Verificar que el OTP coincida
- if (user.otp !== code) {
-    return false; // OTP incorrecto
-  }
 
     const saltRounds = 10; 
     const hashedPassword = await bcrypt.hash(password, saltRounds);

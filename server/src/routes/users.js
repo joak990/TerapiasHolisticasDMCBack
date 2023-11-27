@@ -46,9 +46,8 @@ UsersRouter.post("/send-recovery", async (req,res) => {
 UsersRouter.put("/recovery", async (req,res) => {
     try {
         
-        const {code,email,password} = req.body
-        
-        const recoveryfinish = await recoverypass(email,code,password)
+        const {email,password} = req.body
+        const recoveryfinish = await recoverypass(email,password)
         res.status(200).json(recoveryfinish);
     } catch (error) {
         res.status(400).send({ error: error.message });
