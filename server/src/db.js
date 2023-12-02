@@ -13,6 +13,7 @@ const ComentarioModels = require('./models/ComentariosModels')
 const CalificacionesModels = require('./models/CalificacionesModels')
 const MyCourses = require('./models/MyCoursesModals')
 const MyVideos = require('./models/VideosCursosModals')
+const MyLibros = require('./models/LibrosModels')
 
   const poll = new pg.Pool({connectionString:"postgres://terapiasholisticas:7eDKfa6SAJnrhX90MSBx62NKbRzP00i1@dpg-ckk5b0cl4vmc73fq5a0g-a.ohio-postgres.render.com/terapiasdb_ra8m"})
 
@@ -40,8 +41,9 @@ ComentarioModels(sequelize)
 CalificacionesModels(sequelize)
 MyCourses(sequelize)
 MyVideos(sequelize)
+MyLibros(sequelize)
 
-const { User, Comentario, Calification , Curso , Video} = sequelize.models;
+const { User, Comentario, Calification , Curso , Video , Libro} = sequelize.models;
 
 
 User.hasMany(Comentario);
@@ -67,6 +69,9 @@ Curso.hasMany(Video)
 Video.belongsTo(Curso)
 
 //-------------------------
+
+User.belongsToMany(Libro, { through: 'Usuario_Libro', /* options */ });
+Libro.belongsToMany(User, { through: 'Usuario_Libro', /* options */ });
 
 module.exports = {
     ...sequelize.models,
