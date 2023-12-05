@@ -3,7 +3,9 @@ const {Libro } = require('../db');
 const getLibros = async () => {
     try {
 
-        const books = await Libro.findAll({});
+        const books = await Libro.findAll({
+            attributes: [ 'id',"nombre","descripcion","precio","imagen","isDeleted","createdInDb","link"],
+        });
 
         return books;
     } catch (error) {
