@@ -15,7 +15,7 @@ const validateUsers = async (email, password, type) => {
         }
 
         if (user) {
-            // Utiliza bcrypt.compare para verificar la contraseña
+            
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (passwordMatch) {
@@ -26,10 +26,10 @@ const validateUsers = async (email, password, type) => {
                 };
             }
 
-            return false; // La contraseña no coincide
+            return false;
         }
 
-        return false; // El usuario no existe
+        return false;
 
     } catch (error) {
         throw new Error(error);
