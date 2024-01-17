@@ -18,6 +18,8 @@ Mailerrouter.post('/',async(req,res ) => {
 Mailerrouter.post('/book',async(req,res ) => {
     try {
         const {nombre,apellido,email,telefono} = req.body
+        console.log(nombre, 'nombre');
+        console.log(apellido, 'apellido');
     const response = await sendbookorder({nombre,apellido,email,telefono})
         res.status(200).json(response);
     } catch (error) {

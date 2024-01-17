@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 
 const sendbookorder = async (data) => {
     try {
+        console.log(data,'dataBOOK');
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
@@ -24,7 +25,7 @@ const sendbookorder = async (data) => {
 
         const info = await transporter.sendMail({
             from: 'patrickmurayari03@gmail.com',
-            to: 'joakhaidar@gmail.com',
+            to: data.email,
             subject: '¡Pedido de Compra!',
             html: htmlMessage
         });
