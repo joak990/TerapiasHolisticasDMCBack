@@ -16,7 +16,7 @@ const createUser = async (user) => {
         });
 
         if (userDb && userDb.isDeleted) {
-            return userDb.isDeleted;
+            return true; // Indicar que el usuario existe pero está marcado como eliminado
         }
 
         if (userDb) {
@@ -44,43 +44,45 @@ const createUser = async (user) => {
             password: hashedPassword,
             type: user.type,
             root,
-            isDeleted: true,
+            isDeleted: root === 'register', // Si es de Google, isDeleted será siempre false; de lo contrario, true
             uid: user.uid,
             otp,
         });
-
-        if (newUser) {
-            const transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 587,
-                secure: false,
-                auth: {
-                    user: 'patrickmurayari03@gmail.com',
-                    pass: 'okzbxjuqdtdubzti'
-                },
-            });
-
-            const info = await transporter.sendMail({
-                from: 'patrickmurayari03@gmail.com',
-                to: user.email,
-                subject: '¡Solo falta un paso para tener tu cuenta en Terapias Holiticas DMC!',
-                html: `
-                    <p style="font-size: 18px; font-weight: bold;">Falta poco para tener tu cuenta en Terapias Holiticas DMC. ¡Ya casi estás listo/a!</p>
-                    <p>Tu código de seguridad es <span style="font-weight: bold;">${otp}</span>. Por favor, no compartas este código con nadie.</p>
-                `
-            });
-
-            setTimeout(async () => {
-                try {
-                    await newUser.update({ otp: 0 });
-                    console.log('El OTP ha sido eliminado después de 1 minuto para el email:', user.email);
-                } catch (error) {
-                    console.error('Error al eliminar el OTP:', error);
-                }
-            }, 2 * 60 * 1000);
+        if(newUser.root === "register"){
+            if (newUser) {
+                const transporter = nodemailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 587,
+                    secure: false,
+                    auth: {
+                        user: 'patrickmurayari03@gmail.com',
+                        pass: 'okzbxjuqdtdubzti'
+                    },
+                });
+    
+                const info = await transporter.sendMail({
+                    from: 'patrickmurayari03@gmail.com',
+                    to: user.email,
+                    subject: '¡Solo falta un paso para tener tu cuenta en Terapias Holiticas DMC!',
+                    html: `
+                        <p style="font-size: 18px; font-weight: bold;">Falta poco para tener tu cuenta en Terapias Holiticas DMC. ¡Ya casi estás listo/a!</p>
+                        <p>Tu código de seguridad es <span style="font-weight: bold;">${otp}</span>. Por favor, no compartas este código con nadie.</p>
+                    `
+                });
+    
+                setTimeout(async () => {
+                    try {
+                        await newUser.update({ otp: 0 });
+                        console.log('El OTP ha sido eliminado después de 1 minuto para el email:', user.email);
+                    } catch (error) {
+                        console.error('Error al eliminar el OTP:', error);
+                    }
+                }, 2 * 60 * 1000);
+            }
+    
+            return newUser;
         }
-
-        return newUser;
+       return newUser
     } catch (error) {
         throw new Error(error);
     }
