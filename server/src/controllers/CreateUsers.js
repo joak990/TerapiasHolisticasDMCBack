@@ -1,48 +1,55 @@
 const { User } = require('../db');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
+
 const createUser = async (user) => {
     try {
         function generateRandomOTP() {
             return Math.floor(1000 + Math.random() * 9000);
         }
-        let root = '';
-        let otp = null
-        user.uid ? (root = 'google') : (root = 'register');
-       
-       if(root === "register"){
-        otp = generateRandomOTP()
-       }else{
-        otp= 0
-       }
+
+        let root = user.uid ? 'google' : 'register';
+        let otp = root === 'register' ? generateRandomOTP() : 0;
+
         const userDb = await User.findOne({
             where: { email: user.email }
-        })
+        });
+
         if (userDb && userDb.isDeleted) {
-            return userDb.isDeleted
+            return userDb.isDeleted;
         }
-        // console.log(userDb)
-        if (userDb) return {
-            id: userDb.id,
-            email: userDb.email,
-            name: userDb.name,
-            root: root,
-            isDeleted : userDb.isDeleted,
-            duplicated: true
-        };
-        const hashedPassword = await bcrypt.hash(user.password, 10);
+
+        if (userDb) {
+            return {
+                id: userDb.id,
+                email: userDb.email,
+                name: userDb.name,
+                root,
+                isDeleted: userDb.isDeleted,
+                duplicated: true
+            };
+        }
+
+        let hashedPassword;
+        if (root === 'register') {
+            hashedPassword = await bcrypt.hash(user.password, 10);
+        } else {
+            // Si es de Google, no se realiza el hash de la contraseña
+            hashedPassword = user.password;
+        }
+
         const newUser = await User.create({
             name: user.name,
             email: user.email,
             password: hashedPassword,
             type: user.type,
-            root: root,
+            root,
             isDeleted: true,
             uid: user.uid,
-            otp: otp,
-            
-        })
-        if(newUser){
+            otp,
+        });
+
+        if (newUser) {
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
                 port: 587,
@@ -52,6 +59,7 @@ const createUser = async (user) => {
                     pass: 'okzbxjuqdtdubzti'
                 },
             });
+
             const info = await transporter.sendMail({
                 from: 'patrickmurayari03@gmail.com',
                 to: user.email,
@@ -61,6 +69,7 @@ const createUser = async (user) => {
                     <p>Tu código de seguridad es <span style="font-weight: bold;">${otp}</span>. Por favor, no compartas este código con nadie.</p>
                 `
             });
+
             setTimeout(async () => {
                 try {
                     await newUser.update({ otp: 0 });
@@ -68,19 +77,15 @@ const createUser = async (user) => {
                 } catch (error) {
                     console.error('Error al eliminar el OTP:', error);
                 }
-            },2 * 60 * 1000); 
+            }, 2 * 60 * 1000);
         }
-        
-    
-        return newUser
+
+        return newUser;
     } catch (error) {
-        
-        // console.log(error);
         throw new Error(error);
     }
-}
-
+};
 
 module.exports = {
     createUser
-}
+};
