@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mercadopago = require('mercadopago')
 const app = express()
 mercadopago.configure({
-    access_token:"TEST-4803780874960261-052716-389e6a69c226b07864b895e61923a1c8-605411115"
+    access_token:"TEST-3606617942654450-020714-4ac49faf2162aa0a3aea973a5b811e94-605411115"
 })
 app.use(express.json()); // Middleware para analizar JSON en el cuerpo de la solicitud
 app.use(express.urlencoded({ extended: true }));
