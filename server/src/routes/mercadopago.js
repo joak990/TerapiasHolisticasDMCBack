@@ -17,8 +17,8 @@ mercadoPagoRouter.post("/mercado_pago",  async (req, res) => {
         },
       ],
       back_urls: {
-        "success": "https://amazing-buttercream-47d324.netlify.app/success",
-        "failure": "https://amazing-buttercream-47d324.netlify.app/error",
+        "success": "https://terapiasholisticasdmc.com.ar/success",
+        "failure": "https://terapiasholisticasdmc.com.ar/error",
         "pending": ""
       },
       auto_return: "approved",
