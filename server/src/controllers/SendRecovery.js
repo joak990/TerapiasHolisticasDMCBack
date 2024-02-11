@@ -21,12 +21,12 @@ const sendrecovery = async (email) => {
         port: 587,
         secure: false,
         auth: {
-          user: 'patrickmurayari03@gmail.com',
+          user: 'marcelaciappini@gmail.com',
           pass: 'okzbxjuqdtdubzti'
         },
       });
       const info = await transporter.sendMail({
-        from: 'patrickmurayari03@gmail.com',
+        from: 'marcelaciappini@gmail.com',
         to: email,
         subject: '¡Recupera tu contraseña de Terapias Holisticas DMC!',
         html: `

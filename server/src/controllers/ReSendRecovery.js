@@ -19,12 +19,12 @@ const reSendRecovery = async (email) => {
                 port: 587,
                 secure: false,
                 auth: {
-                    user: 'patrickmurayari03@gmail.com',
-                    pass: 'okzbxjuqdtdubzti'
+                    user: 'marcelaciappini@gmail.com@gmail.com',
+                    pass: 'ruoriafmxevzofsg'
                 },
             });
             const info = await transporter.sendMail({
-                from: 'patrickmurayari03@gmail.com',
+                from: 'marcelaciappini@gmail.com',
                 to: user.email,
                 subject: '¡Solo falta un paso para tener tu cuenta en Terapias Holiticas DMC!',
                 html: `
