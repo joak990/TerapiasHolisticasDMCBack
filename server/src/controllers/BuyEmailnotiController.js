@@ -1,7 +1,8 @@
 
 const nodemailer = require('nodemailer');
 
-const sendmailbuy = async (user) => {
+const sendmailbuy = async (email) => {
+    console.log(email);
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -15,7 +16,7 @@ const sendmailbuy = async (user) => {
 
         const info = await transporter.sendMail({
             from: 'marcelaciappini@gmail.com',
-            to: user.email,
+            to: email.email,
             subject: '¡Gracias por tu compra en Terapias Holísticas DMC!',
             html: `
                 <p style="font-size: 18px; font-weight: bold;">¡Gracias por tu compra en Terapias Holísticas DMC!</p>
