@@ -19,8 +19,8 @@ const emailController = async (data) => {
                 port: 587,
                 secure: false,
                 auth: {
-                    user: 'patrickmurayari03@gmail.com',
-                    pass: 'okzbxjuqdtdubzti'
+                    user: 'marcelaciappini@gmail.com',
+                    pass: 'ruoriafmxevzofsg'
                 },
             });
 

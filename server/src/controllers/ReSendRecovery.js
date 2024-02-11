@@ -19,7 +19,7 @@ const reSendRecovery = async (email) => {
                 port: 587,
                 secure: false,
                 auth: {
-                    user: 'marcelaciappini@gmail.com@gmail.com',
+                    user: 'marcelaciappini@gmail.com',
                     pass: 'ruoriafmxevzofsg'
                 },
             });
