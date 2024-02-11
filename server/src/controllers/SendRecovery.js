@@ -7,7 +7,7 @@ const sendrecovery = async (email) => {
     function generateRandomOTP() {
       return Math.floor(1000 + Math.random() * 9000);
     }
-
+   console.log(email,"email");
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
@@ -22,7 +22,7 @@ const sendrecovery = async (email) => {
         secure: false,
         auth: {
           user: 'marcelaciappini@gmail.com',
-          pass: 'okzbxjuqdtdubzti'
+          pass: 'ruoriafmxevzofsg'
         },
       });
       const info = await transporter.sendMail({
