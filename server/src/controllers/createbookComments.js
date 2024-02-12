@@ -1,14 +1,12 @@
-const { Comentario, User, Curso } = require('../db');
+const { Comentario, User, Libro } = require('../db');
 
 
-const createcomments = async ({ id, Contenido, curso, rating }) => {
+const createbookComments = async ({ id, Contenido, libro, rating }) => {
     try {
 
         const userExists = await User.findOne({ where: { id: id } });
-        const courseExist = await Curso.findOne({ where: { id: curso } });
+        const courseExist = await Libro.findOne({ where: { id: libro } });
 
-        console.log('useExits', userExists);
-        console.log('courseExists', courseExist);
 
         if (!userExists || !courseExist) {
             throw new Error('Usuario o curso no encontrado');
@@ -16,7 +14,7 @@ const createcomments = async ({ id, Contenido, curso, rating }) => {
 
         const newcomment = await Comentario.create({
             UserId: id,
-            Curso_id: curso,
+            Curso_id: libro,
             Contenido: Contenido,
             isDeleted: false,
             rating: rating
@@ -33,5 +31,5 @@ const createcomments = async ({ id, Contenido, curso, rating }) => {
 
 
 module.exports = {
-    createcomments
+    createbookComments
 }

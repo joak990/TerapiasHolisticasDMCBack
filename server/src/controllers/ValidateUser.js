@@ -6,9 +6,16 @@ const validateUsers = async (email, password, type) => {
         const user = await User.findOne({
             where: { email: email }
         });
+
+        if(!user){
+            return {validate:true}
+        }
+
         if(user.isDeleted === true){
             return {isDeleted:true}
         }
+
+      
 
         if (user && user.isDeleted) {
             return user.isDeleted;
