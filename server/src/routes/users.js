@@ -6,6 +6,7 @@ const { validateUsers } = require( '../controllers/ValidateUser.js');
 const sendrecovery = require('../controllers/SendRecovery.js');
 const recoverypass = require('../controllers/RecoveryPass.js');
 const reSendRecovery  = require('../controllers/ReSendRecovery.js');
+const createletter  = require('../controllers/CreateLetter.js');
 
 UsersRouter.post("/users", async (req,res) => {
     try {
@@ -62,6 +63,18 @@ UsersRouter.post("/resendcode", async (req,res) => {
         
         const resendactive = await reSendRecovery(email)
         res.status(200).json(resendactive);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+});
+
+
+UsersRouter.post("/addnewsletter", async (req,res) => {
+    try {
+        
+        const {email} = req.body
+        const responsenewsletter = await createletter(email)
+        res.status(200).json(responsenewsletter);
     } catch (error) {
         res.status(400).send({ error: error.message });
     }

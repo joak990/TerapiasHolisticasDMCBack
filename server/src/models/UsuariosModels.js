@@ -36,12 +36,16 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
-        }, 
-       otp: {
+        },
+        newsletter: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        otp: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        }, 
-       
-       
-    },{ timestamps: false });
+        },
+
+
+    }, { timestamps: false });
 };
