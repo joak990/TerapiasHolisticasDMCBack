@@ -37,10 +37,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: false
         },
-        newsletter: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
+       
         otp: {
             type: DataTypes.INTEGER,
             allowNull: false,
