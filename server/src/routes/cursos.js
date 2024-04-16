@@ -4,7 +4,8 @@ const Cursorouter = express.Router()
 const  getCursos = require('../controllers/getCursos.js')
 const  getCursoPago = require('../controllers/getCursoPago.js')
 const  getmycourses = require('../controllers/getAllMyCourses.js')
-const  sendmailbuy = require('../controllers/BuyEmailnotiController.js')
+const  sendmailbuy = require('../controllers/BuyEmailnotiController.js');
+const sendemailnotis = require('../controllers/SendBuyemailController.js');
 Cursorouter.get('/',async (req, res ) => {
     try {
         const allCursos = await  getCursos();
@@ -39,6 +40,19 @@ Cursorouter.post('/buymail',async (req, res ) => {
     try {
         const {email} = req.body
         const buyemailsend = await  sendmailbuy({email});
+        res.status(200).json(buyemailsend)
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+})
+
+
+
+
+Cursorouter.post('/sendbuyemail',async (req, res ) => {
+    try {
+        const {email} = req.body
+        const buyemailsend = await  sendemailnotis({email});
         res.status(200).json(buyemailsend)
     } catch (error) {
         res.status(400).send({ error: error.message })
